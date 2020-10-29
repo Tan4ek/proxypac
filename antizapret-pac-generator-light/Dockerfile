@@ -7,8 +7,8 @@ WORKDIR /app
 # from config.sh
 # HTTPS (TLS) proxy address
 ENV PACSOCKS5HOST=exapmle.proxy:3143
-ENV PACFILE=pac/proxy-host-ssl.pac
-ENV PACFILE_NOSSL=pac/proxy-host-nossl.pac
+ENV PACFILE=proxy-host.pac
+ENV PACFILE_NOSSL=proxy-host-nossl.pac
 # Perform DNS resolving to detect and filter non-existent domains
 ENV RESOLVE_NXDOMAIN=yes
 

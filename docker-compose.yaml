@@ -22,11 +22,11 @@ services:
     container_name: proxypac-pac-generator
     environment:
       # HTTPS (TLS) proxy address
-      - PACSOCKS5HOST=exapmle.proxy:3143
-      - PACFILE=pac/proxy-host-2uw266mu051au5thgfaz.pac
-      - PACFILE_NOSSL=pac/proxy-host-2uw266mu051au5thgfaz-nossl.pac
+      - PACSOCKS5HOST=exapmle.proxy:6444
+      - PACFILE=proxy-host-2uw266mu051au5thgfaz.pac
+      - PACFILE_NOSSL=proxy-host-2uw266mu051au5thgfaz-nossl.pac
       # Perform DNS resolving to detect and filter non-existent domains
-      - RESOLVE_NXDOMAIN="yes"
+      - RESOLVE_NXDOMAIN=yes
     volumes:
       - pac-files:/app/pac
 volumes:

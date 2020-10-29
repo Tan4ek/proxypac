@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+PACFILE="pac/$PACFILE"
+PACFILE_NOSSL="pac/$PACFILE_NOSSL"
+
 # we using env variables from docker
 #source config/config.sh
 echo -n > "$PACFILE"
