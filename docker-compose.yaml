@@ -1,0 +1,33 @@
+version: "3"
+services:
+  proxy:
+    image: mosajjal/pproxy:latest
+    restart: unless-stopped
+    container_name: proxypac-proxy
+    ports:
+      - 6444:8081
+    command: ["-l", "socks5://:8081"]
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    container_name: proxypac-nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./mime.types:/etc/nginx/mime.types
+      - pac-files:/usr/share/nginx/html/:ro
+  pac-generator:
+    build: ./antizapret-pac-generator-light
+    image: antizapret-pac-generator-light:latest
+    container_name: proxypac-pac-generator
+    environment:
+      # HTTPS (TLS) proxy address
+      - PACSOCKS5HOST=exapmle.proxy:3143
+      - PACFILE=pac/proxy-host-2uw266mu051au5thgfaz.pac
+      - PACFILE_NOSSL=pac/proxy-host-2uw266mu051au5thgfaz-nossl.pac
+      # Perform DNS resolving to detect and filter non-existent domains
+      - RESOLVE_NXDOMAIN="yes"
+    volumes:
+      - pac-files:/app/pac
+volumes:
+  pac-files:
