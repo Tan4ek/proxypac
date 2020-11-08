@@ -27,7 +27,7 @@ RUN touch /var/log/cron.log
 
 # Setup cron job
 # 0 2 * * *  - every day at 2am
-RUN (crontab -l ; echo "0 2 * * * /app/doall.sh >> /var/log/cron.log") | crontab
+RUN (crontab -l ; echo "0 2 * * * cd /app/ && ./doall.sh >> /var/log/cron.log") | crontab
 
 # Run the command on container startup
 CMD /app/doall.sh && cron && tail -f /var/log/cron.log
