@@ -18,3 +18,9 @@ PACFILE_NOSSL - аналогично PACFILE
 
 Добавление хост для принудительного проксирования - добавить в файл [antizapret-pac-generator-light/config/include-hosts-dist.txt](antizapret-pac-generator-light/config/include-hosts-dist.txt) желаемый хост
 Исключить хост из проксирования - добавить в файл [antizapret-pac-generator-light/config/exclude-hosts-dist.txt](antizapret-pac-generator-light/config/exclude-hosts-dist.txt)
+
+## Добавить cronjob на хосте
+Не забываем про время на хост машине
+```
+0 2 * * * /usr/bin/docker restart proxypac-pac-generator
+```

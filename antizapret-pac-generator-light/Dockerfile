@@ -19,15 +19,7 @@ RUN apt update && apt install -y \
    coreutils \
    gawk \
    sipcalc \
-   cron \
     && rm -rf /var/lib/apt/lists/*
 
-# Create the log file to be able to run tail
-RUN touch /var/log/cron.log
-
-# Setup cron job
-# 0 2 * * *  - every day at 2am
-RUN (crontab -l ; echo "0 2 * * * cd /app/ && ./doall.sh >> /var/log/cron.log") | crontab
-
 # Run the command on container startup
-CMD /app/doall.sh && cron && tail -f /var/log/cron.log
+CMD /app/doall.sh
