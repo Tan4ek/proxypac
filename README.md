@@ -14,6 +14,13 @@ PACFILE_NOSSL - аналогично PACFILE
 
 Затем коммандой `docker-compose up --build -d` запусть сборку `.pac` и прокси
 
+После security-обновления пересобери генератор без старых слоёв:
+`docker compose build --pull --no-cache pac-generator`, затем пересоздай его:
+`docker compose up -d pac-generator`. Генератор использует исправленный
+Python и Debian trixie; сборка проверяет исправление CVE-2026-111497 в
+`libbrotli1`, который вызывается через `curl --compressed` при загрузке списков.
+Работающий контейнер обновляется только после пересоздания.
+
 ## Добавить/исключить хост в .pac 
 
 Добавление хост для принудительного проксирования - добавить в файл [antizapret-pac-generator-light/config/include-hosts-dist.txt](antizapret-pac-generator-light/config/include-hosts-dist.txt) желаемый хост
